@@ -1,0 +1,112 @@
+.question3-bg {
+  min-height: 100vh;
+  background: #151a33; /* Midnight navy */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.question3-box {
+  background: rgba(44, 47, 59, 0.97); /* Slightly lighter navy */
+  border-radius: 18px;
+  box-shadow: 0 8px 32px 0 rgba(21, 26, 51, 0.45);
+  padding: 40px 32px 32px 32px;
+  max-width: 480px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.question3-title {
+  color: #a18aff; /* Soft violet */
+  font-size: 2rem;
+  margin-bottom: 12px;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.question3-question {
+  color: #b0b3bb; /* Muted ash gray */
+  font-size: 1.15rem;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.question3-instructions {
+  color: #a18aff;
+  font-size: 1rem;
+  margin-bottom: 18px;
+  text-align: center;
+}
+
+.question3-options {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  margin-bottom: 22px;
+}
+
+.question3-option {
+  display: flex;
+  align-items: center;
+  background: #23263a;
+  border-radius: 8px;
+  padding: 10px 16px;
+  color: #b0b3bb;
+  font-size: 1rem;
+  transition: background 0.2s, color 0.2s;
+  cursor: pointer;
+  gap: 12px;
+}
+
+.question3-option input[type="radio"] {
+  accent-color: #a18aff;
+  margin-right: 10px;
+  transform: scale(1.2);
+}
+
+.question3-option:hover,
+.question3-option:focus-within {
+  background: #2d2f3b;
+  color: #a18aff;
+}
+
+.question3-btn {
+  background: linear-gradient(90deg, #a18aff 0%, #7c6ee6 100%);
+  color: #23263a;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 36px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(161, 138, 255, 0.15);
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+
+.question3-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.question3-btn:hover:enabled,
+.question3-btn:focus:enabled {
+  background: linear-gradient(90deg, #7c6ee6 0%, #a18aff 100%);
+  color: #fff;
+  transform: translateY(-2px) scale(1.03);
+  outline: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .question3-box {
+    padding: 20px 6px 16px 6px;
+    max-width: 98vw;
+  }
+  .question3-title {
+    font-size: 1.3rem;
+  }
+}

@@ -1,0 +1,107 @@
+.question-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: teal;
+  color: #f5f6f7;
+  text-align: center;
+  padding: 20px;
+}
+
+.question-content {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+h2 {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+p {
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+form {
+  width: 100%;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #e0f7fa; /* Lighter shade of teal */
+  border: 1px solid #b2ebf2; /* Outline with a different lighter shade of teal */
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 1.2rem; /* Increase the font size */
+  color: #004d40; /* Brighter color for the text */
+}
+
+.option input[type="radio"] {
+  margin-right: 10px;
+  transform: scale(1.5); /* Increase the size of the radio button */
+  accent-color: teal; /* Customize the color of the radio button */
+}
+
+.submit-button {
+  padding: 15px 30px; /* Make the button bigger */
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  font-size: 18px; /* Increase the font size */
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #45a049;
+}
+
+.submit-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
+}
+
+/* Responsive Design */
+
+/* Large screens (laptops/desktops) */
+@media (min-width: 1024px) {
+  .question-content {
+    max-width: 800px;
+  }
+}
+
+/* Medium screens (tablets) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .question-content {
+    max-width: 700px;
+  }
+}
+
+/* Small screens (phones) */
+@media (max-width: 767px) {
+  .question-content {
+    max-width: 95%;
+  }
+
+  .submit-button {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+
+  h1, h2, p {
+    margin: 0.5em auto;
+  }
+}

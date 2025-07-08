@@ -1,0 +1,1260 @@
+/* General Body Styling */
+body, .feed-container {
+  background: #0A0F2C;
+  min-height: 100vh;
+  margin: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.feed-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #0A0F2C;
+  min-height: 100vh;
+  padding: 0;
+}
+
+/* Container Styling */
+.container {
+  display: flex;
+  height: 100vh;
+  transition: margin-left 0.3s ease;
+}
+
+.container.collapsed .sidebar {
+  width: 60px;
+}
+
+.container.collapsed main {
+  margin-left: 60px;
+}
+
+/* Sidebar Styling */
+.sidebar {
+  width: 250px;
+  background: #000; /* Black background */
+  padding: 20px;
+  color: #ffffff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  box-shadow: 5px 0 10px rgba(0, 0, 0, 0.7);
+  transition: width 0.3s ease;
+}
+
+.sidebar-title {
+  text-align: center;
+  transition: opacity 0.3s ease;
+}
+
+.container.collapsed .sidebar-title {
+  opacity: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin: 15px 0;
+}
+
+.sidebar ul li button {
+  width: 100%;
+  padding: 10px;
+  background: none;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.sidebar ul li button:hover {
+  background: #333;
+}
+
+.sidebar ul li button svg {
+  margin-right: 10px;
+}
+
+.container.collapsed .sidebar ul li button span {
+  display: none;
+}
+
+main {
+  flex-grow: 1;
+  padding: 20px;
+  margin-left: 250px;
+  transition: margin-left 0.3s ease;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 32px 0 0 0;
+}
+
+.toggle-sidebar-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.toggle-sidebar-btn:hover {
+  background: none;
+  color: #ccc;
+}
+
+.add-post-btn {
+  position: fixed;
+  bottom: 32px;
+  right: 40px;
+  z-index: 1100;
+  display: inline-block;
+  margin: 0;
+  padding: 16px 36px;
+  background: #A362EA;
+  color: #fff;
+  border: none;
+  border-radius: 32px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 24px rgba(163,98,234,0.18);
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.add-post-btn:hover {
+  background: #8a4fcf;
+  box-shadow: 0 6px 32px rgba(163,98,234,0.22);
+}
+
+.feed {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  margin-top: 100px; /* Far from the top */
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 32px;
+  height: 70vh;
+  overflow-y: auto;
+  background: transparent;
+  scrollbar-width: thin;
+  scrollbar-color: #23264A #0A0F2C;
+}
+
+.feed::-webkit-scrollbar {
+  width: 8px;
+  background: #0A0F2C;
+}
+.feed::-webkit-scrollbar-thumb {
+  background: #23264A;
+  border-radius: 8px;
+}
+.feed::-webkit-scrollbar-thumb:hover {
+  background: #181C3A;
+}
+.feed::-webkit-scrollbar-corner {
+  background: #0A0F2C;
+}
+
+.post {
+  background: #181C3A;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(10,15,44,0.13);
+  padding: 28px 24px 18px 24px;
+  color: #C4C4C4;
+  position: relative;
+  transition: box-shadow 0.2s;
+  width: 100%;
+  max-width: 520px;
+  min-width: 320px;
+  min-height: 220px; /* Increased min-height for more content space */
+  max-height: 380px; /* Increased max-height for more content space */
+  margin: 0 auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.post.expanded {
+  max-height: none; /* Remove max-height when expanded */
+  overflow: visible;
+}
+
+.post h3 {
+  color: #A362EA;
+  margin: 0 0 8px 0;
+  font-size: 1.15rem;
+  font-weight: bold;
+  letter-spacing: 0.3px;
+}
+
+.post p {
+  color: #C4C4C4;
+  margin: 0 0 12px 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  /* Truncate long content with fade effect */
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  position: relative;
+  transition: max-height 0.2s;
+}
+
+.post.expanded p {
+  -webkit-line-clamp: unset;
+  max-height: none;
+  overflow: visible;
+}
+
+.show-more-less {
+  color: #A362EA;
+  cursor: pointer;
+  font-weight: 500;
+  margin-left: 8px;
+  user-select: none;
+  display: inline-block;
+  background: none;
+  border: none;
+  font-size: 0.98rem;
+  padding: 0;
+}
+
+.post-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 6px;
+}
+
+.like-btn,
+.post-like-btn {
+  cursor: pointer;
+  color: #A362EA;
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  transition: color 0.2s;
+  padding: 0 4px;
+  outline: none;
+}
+.like-btn:hover,
+.post-like-btn:hover,
+.like-btn:active,
+.post-like-btn:active {
+  color: #F48C8C;
+}
+
+.delete-btn,
+.post-delete-btn {
+  color: #C4C4C4;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  transition: color 0.2s;
+  margin-left: auto;
+  padding: 2px 6px;
+  border-radius: 50%;
+}
+.delete-btn:hover,
+.post-delete-btn:hover {
+  color: #F48C8C;
+  background: #2d1a1a;
+}
+
+.post-tags {
+  margin: 6px 0 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.post-tag {
+  background: #23264A;
+  color: #A362EA;
+  border-radius: 8px;
+  padding: 2px 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  box-shadow: 0 1px 2px rgba(163,98,234,0.06);
+}
+
+/* Remove bookmark icon/button everywhere */
+.post-bookmark-btn,
+.bookmark-btn,
+.dashboard-nav-btn .fa-bookmark,
+.dashboard-nav-btn .faRegBookmark,
+.dashboard-nav-btn .fa-bookmark-o {
+  display: none !important;
+}
+
+/* Remove special search-results styling */
+.feed.search-results {
+  margin-top: 60px !important;
+  max-width: 600px;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+  border: none;
+}
+
+/* Style for empty search results message */
+.feed.search-results p {
+  color: #A362EA;
+  text-align: center;
+  font-size: 1.1rem;
+  margin: 32px 0 0 0;
+}
+
+/* Style for search results post cards */
+.feed.search-results .post {
+  background: #23264A;
+  border-radius: 12px;
+  box-shadow: 0 1px 8px rgba(20,20,40,0.08);
+  padding: 22px 20px 14px 20px;
+  margin-bottom: 18px;
+  color: #C4C4C4;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.feed.search-results .post:hover,
+.feed.search-results .post:focus-within {
+  background: #282B4A;
+  box-shadow: 0 2px 16px rgba(244,140,140,0.10);
+}
+
+.feed.search-results .post-tags {
+  margin-top: 8px;
+}
+
+/* Custom scrollbar for dark theme */
+.feed::-webkit-scrollbar {
+  width: 8px;
+  background: #0A0F2C;
+}
+.feed::-webkit-scrollbar-thumb {
+  background: #23264A;
+  border-radius: 8px;
+}
+.feed::-webkit-scrollbar-thumb:hover {
+  background: #181C3A;
+}
+.feed::-webkit-scrollbar-corner {
+  background: #0A0F2C;
+}
+
+.post {
+  background: #181C3A;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(10,15,44,0.13);
+  padding: 28px 24px 18px 24px;
+  color: #C4C4C4;
+  position: relative;
+  transition: box-shadow 0.2s;
+  width: 100%;
+  max-width: 520px;
+  min-width: 320px;
+  min-height: 220px; /* Increased min-height for more content space */
+  max-height: 380px; /* Increased max-height for more content space */
+  margin: 0 auto;
+}
+
+.post h3 {
+  color: #A362EA;
+  margin: 0 0 10px 0;
+  font-size: 1.3rem;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+.post p {
+  color: #C4C4C4;
+  margin: 0 0 18px 0;
+  font-size: 1.08rem;
+}
+
+.post-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 8px;
+}
+
+.like-btn,
+.post-like-btn {
+  cursor: pointer;
+  color: #A362EA;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  transition: color 0.2s;
+  padding: 0 6px;
+  outline: none;
+}
+.like-btn:hover,
+.post-like-btn:hover,
+.like-btn:active,
+.post-like-btn:active {
+  color: #F48C8C;
+}
+
+.bookmark-btn {
+  cursor: pointer;
+  color: #A362EA;
+  transition: color 0.2s;
+}
+.bookmark-btn:hover {
+  color: #fff;
+}
+
+.comment-btn {
+  color: #A362EA;
+  cursor: pointer;
+}
+
+.delete-btn {
+  color: #C4C4C4;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.delete-btn:hover {
+  color: #F48C8C;
+}
+
+.no-posts {
+  color: #C4C4C4;
+  text-align: center;
+  margin-top: 40px;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+}
+
+/* Modal Styling */
+/* Add Post Modal Styling - always pops up centered and above everything */
+.modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(10,15,44,0.92); /* Midnight Navy overlay */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.modal-content {
+  background: #181C3A; /* Use your theme's modal color */
+  border-radius: 12px;
+  padding: 40px 36px 32px 36px;
+  box-shadow: 0 4px 32px rgba(10,15,44,0.22);
+  width: 100%;
+  max-width: 700px;
+  min-height: 420px;
+  color: #C4C4C4;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.close-btn {
+  position: absolute;
+  top: 18px;
+  right: 22px;
+  width: 38px;
+  height: 38px;
+  background: rgba(163,98,234,0.08);
+  border: 2px solid #A362EA;
+  border-radius: 50%;
+  color: #A362EA;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(163,98,234,0.10);
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.close-btn:hover {
+  background: #A362EA;
+  color: #fff;
+  border-color: #C4C4C4;
+}
+
+.modal-content h2 {
+  color: #A362EA; /* Soft Violet */
+  margin-bottom: 24px;
+  font-size: 1.35rem;
+  font-weight: bold;
+  text-align: left;
+  letter-spacing: 0.5px;
+}
+
+.modal-form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 18px;
+}
+
+.modal-content input,
+.modal-content textarea {
+  background: #181C3A;
+  color: #C4C4C4;
+  border: 1.5px solid #A362EA;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 1.08rem;
+  margin-bottom: 16px;
+  resize: none;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  outline: none;
+  transition: border 0.2s;
+}
+.modal-content input:focus,
+.modal-content textarea:focus {
+  border: 1.5px solid #C4C4C4;
+}
+
+.modal-content input {
+  height: 48px;
+  min-height: 48px;
+  max-height: 48px;
+}
+
+.modal-content textarea {
+  min-height: 120px;
+  height: 160px;
+  max-height: 260px;
+  font-size: 1.08rem;
+  margin-bottom: 0;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  background: #A362EA;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.13rem;
+  font-weight: bold;
+  cursor: pointer;
+  letter-spacing: 1px;
+  margin-top: 10px;
+  transition: background 0.2s;
+  box-shadow: 0 2px 12px rgba(163,98,234,0.10);
+}
+.submit-btn:hover {
+  background: #7e3fcf;
+}
+
+/* Dashboard Styling */
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+  background: #0A0F2C;
+}
+.dashboard-sidebar {
+  width: 300px; /* Make sidebar even wider to fit the search bar */
+  background: #181C3A;
+  color: #C4C4C4;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0 0 24px 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  transition: width 0.3s;
+  box-shadow: 2px 0 16px rgba(10,15,44,0.13);
+  z-index: 10;
+  border-right: 1.5px solid #23264A;
+}
+.dashboard-container.collapsed .dashboard-sidebar {
+  width: 64px;
+}
+.dashboard-logo-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  padding: 32px 18px 24px 24px;
+  width: 100%;
+  position: relative;
+}
+.dashboard-toggle-btn {
+  margin-left: 0;
+  margin-right: 4px;
+  background: #23264A;
+  border: none;
+  color: #A362EA;
+  font-size: 1.6rem;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s;
+  position: static;
+}
+.dashboard-toggle-btn:hover {
+  background: #A362EA;
+  color: #fff;
+}
+.dashboard-logo-icon {
+  color: #A362EA;
+  font-size: 1.6rem;
+  margin-right: 2px;
+}
+.dashboard-container.collapsed .dashboard-logo-icon {
+  display: none;
+}
+.dashboard-logo-text {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #A362EA;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+.dashboard-container.collapsed .dashboard-logo-text {
+  display: none;
+}
+.dashboard-nav {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 24px;
+  gap: 8px;
+}
+.dashboard-nav-btn {
+  background: none;
+  border: none;
+  color: #C4C4C4;
+  font-size: 1.1rem;
+  padding: 14px 24px;
+  width: 100%;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-radius: 0 24px 24px 0;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+.dashboard-nav-btn.active,
+.dashboard-nav-btn:hover {
+  background: #A362EA;
+  color: #fff;
+}
+.dashboard-container.collapsed .dashboard-nav-btn span {
+  display: none;
+}
+.dashboard-main {
+  flex: 1;
+  padding: 0 0 0 0; /* Remove top padding */
+  max-width: 700px;
+  margin: 0 auto;
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-left: 300px; /* Match sidebar width */
+  transition: margin-left 0.3s;
+}
+.dashboard-container.collapsed .dashboard-main {
+  margin-left: 64px;
+}
+
+/* Search Bar and Tags Styling */
+.search-bar-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  margin-top: 8px;
+  gap: 12px;
+}
+
+.search-icon-btn {
+  background: #23264A;
+  border: none;
+  color: #A362EA;
+  font-size: 1.4rem;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 2px 8px rgba(163,98,234,0.10);
+}
+.search-icon-btn:hover {
+  background: #A362EA;
+  color: #fff;
+}
+
+.tag-search-form.theme {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #181C3A;
+  border-radius: 8px;
+  padding: 8px 12px;
+  box-shadow: 0 2px 12px rgba(10,15,44,0.10);
+  margin-left: 8px;
+}
+
+.tag-search-input {
+  background: #23264A;
+  color: #C4C4C4;
+  border: 1px solid #A362EA;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 1rem;
+  outline: none;
+  min-width: 160px;
+  transition: border 0.2s;
+}
+.tag-search-input:focus {
+  border: 1.5px solid #F48C8C;
+}
+
+.tag-search-btn {
+  background: #A362EA;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 18px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.tag-search-btn:hover {
+  background: #8a4fcf;
+}
+
+.post-tags {
+  margin: 8px 0 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.post-tag {
+  background: #23264A;
+  color: #A362EA;
+  border-radius: 8px;
+  padding: 3px 12px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  box-shadow: 0 1px 4px rgba(163,98,234,0.08);
+}
+
+.search-loading {
+  color: #A362EA;
+  font-size: 1.1rem;
+  margin: 16px 0;
+}
+
+/* Top Search Bar Styling */
+.top-search-bar-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 32px;
+  margin-bottom: 18px;
+  z-index: 100;
+  position: relative;
+}
+
+.top-search-bar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 540px;
+  gap: 12px;
+  background: transparent;
+}
+
+.tag-search-form.top {
+  width: 100%;
+  max-width: 420px;
+  margin-left: 0;
+  background: #181C3A;
+  border-radius: 8px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 2px 12px rgba(10,15,44,0.10);
+}
+
+.top-search-bar-inner .search-icon-btn {
+
+  font-size: 1.5rem;
+  width: 44px;
+  height: 44px;
+  background: #23264A;
+  color: #A362EA;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 2px 8px rgba(163,98,234,0.10);
+}
+.top-search-bar-inner .search-icon-btn:hover {
+  background: #A362EA;
+  color: #fff;
+}
+
+/* Improved search bar styling, visible on home and my posts, with horizontal layout */
+.dashboard-main-search-bar {
+  width: 100%;
+  max-width: 520px;
+  margin-top: 100px;
+  margin-bottom: 48px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  background: #191C2F;
+  border-radius: 32px;
+  padding: 0 18px;
+  box-shadow: 0 2px 16px rgba(20,20,40,0.10);
+  height: 48px;
+  border: 1.5px solid #23264A;
+  position: sticky;
+  top: 60px; /* Adjust as needed for your layout/header */
+  z-index: 20;
+  gap: 0;
+  flex-shrink: 0;
+  flex-grow: 0;
+  min-width: 320px;
+  max-width: 520px;
+}
+
+.dashboard-main-search-bar .search-icon-btn {
+  display: none;
+}
+
+.dashboard-main-search-bar .tag-search-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: none;
+  width: 100%;
+  box-sizing: border-box;
+  /* Prevent movement/expansion on input */
+}
+
+/* Keep the search bar always visible and in place */
+.dashboard-main-search-bar,
+.dashboard-main-search-bar * {
+  transition: none !important;
+}
+
+/* Posts far from the top */
+.feed {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin-top: 60px; /* Far from the top */
+}
+
+/* Search results styling */
+.dashboard-main-search-results {
+  width: 100%;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0; /* Place directly beneath the search bar */
+  margin-bottom: 32px;
+  background: #181C3A;
+  border-radius: 18px;
+  box-shadow: 0 2px 16px rgba(20,20,40,0.10);
+  padding: 24px 24px 16px 24px;
+  z-index: 10;
+  position: relative;
+  border: 1.5px solid #23264A;
+}
+
+.dashboard-main-search-results h2,
+.dashboard-main-search-results h3 {
+  color: #A362EA;
+  margin-top: 0;
+}
+
+/* Highlight matched text in search results */
+.dashboard-main-search-results mark,
+.dashboard-main-search-results .highlight {
+  background: #F48C8C !important;
+  color: #fff !important;
+  border-radius: 4px;
+  padding: 0 2px;
+  font-weight: 700;
+  box-shadow: 0 1px 4px rgba(244,140,140,0.13);
+  /* Add a subtle outline for visibility */
+  outline: 1.5px solid #F48C8C;
+}
+
+/* Highlight the whole result container on hover/focus */
+.dashboard-main-search-results .post {
+  margin-bottom: 18px;
+  border-radius: 12px;
+  box-shadow: 0 1px 8px rgba(20,20,40,0.08);
+  background: #23264A;
+  padding: 18px 18px 12px 18px;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.dashboard-main-search-results .post:hover,
+.dashboard-main-search-results .post:focus-within {
+  background: #282B4A;
+  box-shadow: 0 2px 16px rgba(244,140,140,0.10);
+}
+
+.dashboard-main-search-results .post-tags {
+  margin-top: 8px;
+}
+
+/* Sticky search bar inside the component */
+.sticky-search-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #0A0F2C;
+  border-bottom: 1.5px solid #23264A;
+  box-shadow: 0 2px 12px rgba(10,15,44,0.07);
+}
+
+/* Scrollable feed area for posts only */
+.feed.feed-scrollable {
+  max-height: 65vh;
+  min-height: 320px;
+  overflow-y: auto;
+  padding-bottom: 32px;
+  margin-top: 0;
+  /* Remove margin-top so search bar stays at the top */
+}
+
+/* Custom dark scrollbar for feed */
+.feed.feed-scrollable::-webkit-scrollbar {
+  width: 8px;
+  background: #0A0F2C;
+}
+.feed.feed-scrollable::-webkit-scrollbar-thumb {
+  background: #23264A;
+  border-radius: 8px;
+}
+.feed.feed-scrollable::-webkit-scrollbar-thumb:hover {
+  background: #181C3A;
+}
+.feed.feed-scrollable::-webkit-scrollbar-corner {
+  background: #0A0F2C;
+}
+
+/* For Firefox */
+.feed.feed-scrollable {
+  scrollbar-width: thin;
+  scrollbar-color: #23264A #0A0F2C;
+}
+
+/* Responsive adjustments */
+@media (max-width: 700px) {
+  main {
+    padding: 16px 0 0 0;
+    max-width: 98vw;
+  }
+  .modal-content {
+    padding: 18px 8px 16px 8px;
+  }
+  .post {
+    padding: 18px 8px 12px 8px;
+  }
+}
+
+@media (max-width: 900px) {
+  .modal-content {
+    max-width: 98vw;
+    padding: 18px 8px 16px 8px;
+    min-height: 320px;
+  }
+  .modal-form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+  .modal-content input,
+  .modal-content textarea {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+  .dashboard-sidebar {
+    width: 56px;
+    min-width: 56px;
+    padding: 0 0 12px 0;
+  }
+  .dashboard-container.collapsed .dashboard-sidebar {
+    width: 48px;
+  }
+  .dashboard-main {
+    padding: 24px 0 0 0;
+    max-width: 98vw;
+  }
+}
+
+/* Delete button and warning modal styles */
+.post-delete-btn {
+  background: none;
+  border: none;
+  color: #F48C8C;
+  font-size: 1.3rem;
+  cursor: pointer;
+  margin-left: auto;
+  margin-right: 0;
+  padding: 4px 8px;
+  border-radius: 50%;
+  transition: background 0.2s, color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.post-delete-btn:hover,
+.post-delete-btn:focus {
+  background: #2d1a1a;
+  color: #fff;
+  outline: none;
+}
+
+/* Warning modal for delete confirmation */
+.delete-warning-modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(10,15,44,0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+.delete-warning-content {
+  background: #181C3A;
+  border-radius: 14px;
+  padding: 38px 32px 28px 32px;
+  box-shadow: 0 4px 32px rgba(244,140,140,0.18);
+  color: #fff;
+  min-width: 320px;
+  max-width: 90vw;
+  text-align: center;
+  position: relative;
+}
+.delete-warning-content h3 {
+  color: #F48C8C;
+  margin-bottom: 18px;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.delete-warning-content p {
+  color: #fff;
+  margin-bottom: 24px;
+}
+.delete-warning-actions {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+}
+.delete-warning-btn {
+  padding: 10px 28px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.delete-warning-btn.confirm {
+  background: #F48C8C;
+  color: #fff;
+}
+.delete-warning-btn.confirm:hover {
+  background: #c23b3b;
+}
+.delete-warning-btn.cancel {
+  background: #23264A;
+  color: #fff;
+}
+.delete-warning-btn.cancel:hover {
+  background: #181C3A;
+}
+
+.post-bookmark-btn {
+  background: none;
+  border: none;
+  color: #A362EA;
+  font-size: 1.3rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 50%;
+  transition: background 0.2s, color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.post-bookmark-btn:hover,
+.post-bookmark-btn:focus {
+  background: #23264A;
+  color: #fff;
+  outline: none;
+}
+
+.show-more-less {
+  color: #A362EA;
+  cursor: pointer;
+  font-weight: 500;
+  margin-left: 8px;
+  user-select: none;
+}
+
+/* Modal Styling for Add Post (ensure popup is centered and above all content) */
+.add-post-modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(10,15,44,0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+}
+
+.add-post-modal-content {
+  background: #181C3A;
+  border-radius: 14px;
+  padding: 40px 36px 32px 36px;
+  box-shadow: 0 4px 32px rgba(10,15,44,0.22);
+  width: 100%;
+  max-width: 520px;
+  min-width: 320px;
+  min-height: 320px;
+  color: #C4C4C4;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.add-post-form-group {
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.add-post-form-group label {
+  color: #A362EA;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.add-post-form-group input,
+.add-post-form-group textarea {
+  background: #23264A;
+  color: #C4C4C4;
+  border: 1.5px solid #A362EA;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 1rem;
+  resize: none;
+  width: 100%;
+  box-sizing: border-box;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.add-post-form-group input:focus,
+.add-post-form-group textarea:focus {
+  border: 1.5px solid #C4C4C4;
+}
+
+.add-post-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+  margin-top: 12px;
+}
+
+.add-post-submit {
+  background: #A362EA;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 28px;
+  font-size: 1.08rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.add-post-submit:hover {
+  background: #7e3fcf;
+}
+
+.add-post-cancel {
+  background: #23264A;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 24px;
+  font-size: 1.08rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.add-post-cancel:hover {
+  background: #181C3A;
+}
+
+.error-message {
+  color: #F48C8C;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+/* No CSS change needed for the tags placeholder, update the placeholder in your JS/JSX: */
+/* In Feed.js, update the placeholder for the tags input: */
+/*
+<input
+  id="post-tags"
+  type="text"
+  value={newPost.tags}
+  onChange={(e) => setNewPost({ ...newPost, tags: e.target.value })}
+  placeholder="e.g. thoughts, advice, vent (comma separated)"
+/>
+*/

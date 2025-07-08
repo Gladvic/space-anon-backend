@@ -1,0 +1,186 @@
+/* filepath: /c:/Users/victoria/Desktop/space-anon/src/App.css */
+#terms-modal {
+  display: none; /* Initially hidden */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+}
+
+#terms-content {
+  background-color: #fff;
+  color: #000;
+  margin: 10% auto;
+  padding: 20px;
+  width: 80%;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+#close-terms {
+  display: block;
+  margin: 10px auto 0;
+  padding: 10px 20px;
+  background-color: teal;
+  color: white;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#close-terms:hover {
+  background-color: #45a049;
+}
+
+.btn {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.btn:hover {
+  background-color: #45a049;
+}
+
+.btn-guest {
+  background-color: #f39c12; /* Different color for Guest Button */
+}
+
+.btn-guest:hover {
+  background-color: #e67e22; /* Hover effect for Guest Button */
+}
+
+#create-post {
+  margin-top: 20px;
+  padding-top: 60px; /* Ensure space for browser/tab bars */
+  box-sizing: border-box;
+}
+
+#create-post h1 {
+  text-align: center;
+  margin-top: 0;
+  padding-top: 0;
+  /* Always visible at the top of the form */
+  position: sticky;
+  top: 0;
+  background: #f9f9f9;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60px;
+  font-size: 2rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* Responsive: extra space for mobile browser bars */
+@media (max-width: 600px) {
+  #create-post {
+    padding-top: 80px;
+  }
+  #create-post h1 {
+    font-size: 1.5rem;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    min-height: 50px;
+  }
+}
+
+#create-post-form {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+#create-post-form input, #create-post-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+#create-post-form button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+#create-post-form button:hover {
+  background-color: #45a049;
+}
+
+.welcome-message {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #333;
+  background: #f9f9f9;
+  border-radius: 8px;
+  margin: 90px auto 24px auto;
+  padding: 16px 20px;
+  text-align: center;
+  max-width: 700px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+}
+
+/* Sticky search bar at the top of the feed area */
+.dashboard-main-search-bar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: #0A0F2C;
+  border-bottom: 1.5px solid #23264A;
+}
+
+/* Scrollable posts area with dark themed scrollbar */
+.feed {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  margin-top: 0;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 32px;
+  height: 70vh;
+  max-height: 70vh;
+  overflow-y: auto;
+  background: transparent;
+  scrollbar-width: thin;
+  scrollbar-color: #23264A #0A0F2C;
+}
+
+.feed::-webkit-scrollbar {
+  width: 8px;
+  background: #0A0F2C;
+}
+.feed::-webkit-scrollbar-thumb {
+  background: #23264A;
+  border-radius: 8px;
+}
+.feed::-webkit-scrollbar-thumb:hover {
+  background: #181C3A;
+}
+.feed::-webkit-scrollbar-corner {
+  background: #0A0F2C;
+}
