@@ -1,18 +1,23 @@
+console.log("DATABASE_URL:", process.env.DATABASE_URL);
+
+require('dotenv').config();
 const express = require("express");
 const cors = require("cors");
 const { Pool } = require("pg");
+
+// Only log DATABASE_URL in development
+if (process.env.NODE_ENV !== "production") {
+  console.log("DATABASE_URL:", process.env.DATABASE_URL);
+}
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// PostgreSQL connection
+// PostgreSQL connection using environment variables and Render-compatible SSL
 const pool = new Pool({
-  user: "postgres",
-  host: "localhost",
-  database: "postgres",
-  password: "osaretin12",
-  port: 5432,
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false }
 });
 
 // Create posts, bookmarks, comments, and comment_likes tables if they don't exist
@@ -212,6 +217,33 @@ app.get("/api/comments/:postId", async (req, res) => {
   res.json(topLevelComments);
 });
 
+// GET all comments and replies for a post (no limit, unlimited nesting)
+app.get("/api/comments/unlimited/:postId", async (req, res) => {
+  const { postId } = req.params;
+  // Fetch all comments for the post, with likes
+  const result = await pool.query(
+    `SELECT c.*, 
+      COALESCE(json_agg(cl.userid) FILTER (WHERE cl.id IS NOT NULL), '[]') AS likes
+     FROM comments c
+     LEFT JOIN comment_likes cl ON cl.comment_id = c.id
+     WHERE c.postid = $1
+     GROUP BY c.id
+     ORDER BY c.createdat ASC`, [postId]);
+  // Build unlimited nested structure
+  const comments = result.rows;
+  const map = {};
+  comments.forEach(c => { c.replies = []; map[c.id] = c; });
+  const tree = [];
+  comments.forEach(c => {
+    if (c.parent_id) {
+      map[c.parent_id]?.replies.push(c);
+    } else {
+      tree.push(c);
+    }
+  });
+  res.json(tree);
+});
+
 // PUT /api/comments/:id/like → like/unlike a comment
 app.put("/api/comments/:id/like", async (req, res) => {
   const { id } = req.params;
@@ -284,32 +316,5 @@ app.get("/api/notifications/:user_id", async (req, res) => {
   res.json(result.rows);
 });
 
-// GET all comments and replies for a post (no limit, unlimited nesting)
-app.get("/api/comments/:postId", async (req, res) => {
-  const { postId } = req.params;
-  // Fetch all comments for the post, with likes
-  const result = await pool.query(
-    `SELECT c.*, 
-      COALESCE(json_agg(cl.userid) FILTER (WHERE cl.id IS NOT NULL), '[]') AS likes
-     FROM comments c
-     LEFT JOIN comment_likes cl ON cl.comment_id = c.id
-     WHERE c.postid = $1
-     GROUP BY c.id
-     ORDER BY c.createdat ASC`, [postId]);
-  // Build unlimited nested structure
-  const comments = result.rows;
-  const map = {};
-  comments.forEach(c => { c.replies = []; map[c.id] = c; });
-  const tree = [];
-  comments.forEach(c => {
-    if (c.parent_id) {
-      map[c.parent_id]?.replies.push(c);
-    } else {
-      tree.push(c);
-    }
-  });
-  res.json(tree);
-});
-
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
